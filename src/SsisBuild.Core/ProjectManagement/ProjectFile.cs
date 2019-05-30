@@ -99,8 +99,10 @@ namespace SsisBuild.Core.ProjectManagement
             ThrowIfNotInitialized();
 
             var xmlToSave = PrepareXmlToSave(protectionLevel, password);
+            XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true};
+            XmlWriter writer = XmlWriter.Create(fileStream, settings);
 
-            xmlToSave.Save(fileStream);
+            xmlToSave.Save(writer);
         }
 
         public void Save(string filePath)
